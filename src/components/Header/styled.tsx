@@ -23,7 +23,9 @@ export const Content = styled.div`
     padding: ${metrics.padding.medium};
     width: ${metrics.widthPage};
   }
+`;
 
+export const Title = styled.div`
   h1 {
     color: ${colors.theme.pink};
     margin: 0;
@@ -32,6 +34,12 @@ export const Content = styled.div`
     @media (min-width: ${breakpoints.md}) {
       margin: 0;
     }
+  }
+
+  h2 {
+    color: ${colors.theme.white};
+    margin: 0;
+    font-weight: 200;
   }
 `;
 

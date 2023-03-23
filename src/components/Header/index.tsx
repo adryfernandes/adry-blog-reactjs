@@ -1,4 +1,11 @@
-import { Container, Icon, Button, SearchContent, Content } from "./styled";
+import {
+  Container,
+  Icon,
+  Button,
+  SearchContent,
+  Content,
+  Title,
+} from "./styled";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
@@ -8,7 +15,10 @@ export function Header() {
   return (
     <Container>
       <Content>
-        <h1>Anotações da Adry</h1>
+        <Title>
+          <h1> My Learnings Hub</h1>
+          <h2>Adryane Fernandes</h2>
+        </Title>
         <SearchContent>
           <input placeholder="Pesquisar anotação..." />
           <Button onClick={() => setClickButton(!clickButton)}>
