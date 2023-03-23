@@ -6,4 +6,5 @@ export const metrics = {
     mediumLarge: "2.5rem",
     large: "3rem",
   },
+  widthPage: "75%",
 };

@@ -1,4 +1,4 @@
-import { Container, Icon, Button, SearchContent } from "./styled";
+import { Container, Icon, Button, SearchContent, Content } from "./styled";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
@@ -7,16 +7,18 @@ export function Header() {
 
   return (
     <Container>
-      <h1>Anotações Adry</h1>
-      <SearchContent>
-        <input placeholder="Pesquisar anotação..." />
-        <Button onClick={() => setClickButton(!clickButton)}>
-          <Icon
-            icon={faMagnifyingGlass}
-            className={clickButton ? "click" : ""}
-          />
-        </Button>
-      </SearchContent>
+      <Content>
+        <h1>Anotações da Adry</h1>
+        <SearchContent>
+          <input placeholder="Pesquisar anotação..." />
+          <Button onClick={() => setClickButton(!clickButton)}>
+            <Icon
+              icon={faMagnifyingGlass}
+              className={clickButton ? "click" : ""}
+            />
+          </Button>
+        </SearchContent>
+      </Content>
     </Container>
   );
 }
