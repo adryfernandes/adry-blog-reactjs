@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { breakpoints } from "../../theme/breakpoints";
 import { metrics } from "../../theme/metrics";
 
-export const Main = styled.main`
-  min-height: 80vh;
+export const Container = styled.main`
+  height: 84vh;
   padding: ${metrics.padding.medium};
 
   @media (min-width: ${breakpoints.md}) {

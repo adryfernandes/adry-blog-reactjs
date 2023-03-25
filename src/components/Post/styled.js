@@ -13,7 +13,7 @@ export const Content = styled.div`
   padding: ${metrics.padding.small};
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(57, 56, 56, 0.1);
   }
 
   h2 {
