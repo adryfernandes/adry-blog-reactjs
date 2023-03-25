@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { Post } from "../../components/Post";
 import { goToPostDetailsPage } from "../../router/coordinates";
 
 export function Home() {
+  const navigate = useNavigate();
   const postsMock = [
     {
       title: "post1",
@@ -29,7 +31,7 @@ export function Home() {
         description={p.description}
         createdAt={p.created_at}
         matters={p.matters}
-        onClick={() => goToPostDetailsPage(p.uuid)}
+        onClick={() => goToPostDetailsPage(navigate, p.uuid)}
       />
     );
   });
