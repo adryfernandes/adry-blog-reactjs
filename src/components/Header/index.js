@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import {
   Container,
   Icon,
@@ -6,8 +8,6 @@ import {
   Content,
   Title,
 } from "./styled";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 
 export function Header() {
   const [clickButton, setClickButton] = useState(false);

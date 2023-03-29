@@ -11,7 +11,8 @@
   },
   "plugins": ["react", "react-hooks", "prettier", "import"],
   "rules": {
-    "import/no-unresolved": "warn"
+    "import/no-unresolved": "warn",
+    "react/prop-types": "off"
   },
   "settings": {
     "import/resolver": {

@@ -26,10 +26,14 @@ export const Content = styled.div`
 `;
 
 export const Title = styled.div`
+  margin-bottom: 1.5rem;
+  @media (min-width: ${breakpoints.md}) {
+    margin-bottom: 0;
+  }
+
   h1 {
     color: ${colors.theme.pink};
     margin: 0;
-    margin-bottom: 1.5rem;
 
     @media (min-width: ${breakpoints.md}) {
       margin: 0;
