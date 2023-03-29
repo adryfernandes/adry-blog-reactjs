@@ -7,4 +7,10 @@ export const colors = {
   },
   darkPink: "#b42b4d",
   gray: "#8c8c8c",
+  lightGray: "#EBEBEB",
+  error: {
+    background: "#FDEDED",
+    color: "#5F2120",
+    icon: "#D74141",
+  },
 };

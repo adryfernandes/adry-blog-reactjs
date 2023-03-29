@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { breakpoints } from "../../theme/breakpoints";
 import { colors } from "../../theme/colors";
-import { metrics } from "../../theme/metrics";
 
 export const Container = styled.div`
   h1 {

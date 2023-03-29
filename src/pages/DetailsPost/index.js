@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useRequestData } from "../../hooks/useRequestData";
 import { goToHome } from "../../router/coordinates";
 import { Container } from "./styled";
 
@@ -10,7 +9,7 @@ export function DetailsPost() {
     goToHome(navigate);
   }
 
-  const post = useRequestData({}, `/post/${uuid}`);
+  const post = {};
 
   const tags = post && post.tags;
   const listTags =
