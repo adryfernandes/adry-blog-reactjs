@@ -11,12 +11,15 @@ export function DetailsPost() {
     matters: ["ReactJs", "typescript", "eslint"],
   };
 
+  const listMatters = postMock.matters.map((m) => <span key={m}>{m}</span>);
+
   return (
     <Container>
       <div id="title">
         <h1>{postMock.title}</h1>
         <h3>{postMock.description}</h3>
         <p id="date">{postMock.created_at}</p>
+        {listMatters}
       </div>
 
       <div dangerouslySetInnerHTML={{ __html: postMock.content }} />

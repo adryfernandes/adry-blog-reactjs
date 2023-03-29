@@ -16,7 +16,6 @@ export const Container = styled.div`
   #date {
     color: ${colors.gray};
     margin-top: 0.8rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding: ${metrics.padding.small} 0;
   }
 
@@ -29,5 +28,10 @@ export const Container = styled.div`
     @media (min-width: ${breakpoints.md}) {
       margin-top: 0;
     }
+  }
+
+  span {
+    margin-right: 1rem;
+    color: ${colors.theme.pink};
   }
 `;
