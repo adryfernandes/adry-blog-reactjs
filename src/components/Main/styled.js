@@ -3,7 +3,7 @@ import { breakpoints } from "../../theme/breakpoints";
 import { metrics } from "../../theme/metrics";
 
 export const Container = styled.main`
-  height: 84vh;
+  min-height: 84vh;
   padding: ${metrics.padding.medium};
 
   @media (min-width: ${breakpoints.md}) {

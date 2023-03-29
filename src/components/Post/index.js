@@ -2,10 +2,11 @@ import { Container, Content, Matters, Top } from "./styled";
 
 export function Post(props) {
   // eslint-disable-next-line react/prop-types
-  const { title, description, createdAt, matters, onClick } = props;
+  const { title, description, createdAt, tags, onClick } = props;
 
   // eslint-disable-next-line react/prop-types
-  const listMatters = matters.map((m) => <span key={m}>{m}</span>);
+  const listMatters =
+    tags && tags.map((m) => <span key={m.uuid}>{m.title.toUpperCase()}</span>);
 
   return (
     <Container onClick={onClick}>

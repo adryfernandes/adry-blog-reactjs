@@ -21,6 +21,11 @@ export const Content = styled.div`
     margin: 0;
   }
 
+  h2::first-letter,
+  h4::first-letter {
+    text-transform: uppercase;
+  }
+
   h4 {
     margin: 0;
     font-weight: 400;

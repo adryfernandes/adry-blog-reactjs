@@ -1,38 +1,30 @@
+import { useNavigate } from "react-router-dom";
 import { Post } from "../../components/Post";
+import { useRequestData } from "../../hooks/useRequestData";
 import { goToPostDetailsPage } from "../../router/coordinates";
 
 export function Home() {
-  const postsMock = [
-    {
-      title: "post1",
-      description: "Descrição",
-      content: "<div>Eae bixa</div>",
-      uuid: "123",
-      created_at: "10/02/2023",
-      matters: ["ReactJs", "typescript", "eslint"],
-    },
-    {
-      title: "post1",
-      description: "Descrição",
-      content: "<div>Eae bixa</div>",
-      uuid: "123",
-      created_at: "10/02/2023",
-      matters: ["ReactJs", "typescript", "eslint"],
-    },
-  ];
+  const navigate = useNavigate();
+  const allPosts = useRequestData({}, "/post/list");
 
-  const listOfPosts = postsMock.map((p) => {
-    return (
-      <Post
-        key={p.uuid}
-        title={p.title}
-        description={p.description}
-        createdAt={p.created_at}
-        matters={p.matters}
-        onClick={() => goToPostDetailsPage(p.uuid)}
-      />
-    );
-  });
+  const listPosts = () => {
+    if (!allPosts) return <p>carregando</p>;
 
-  return <section>{listOfPosts}</section>;
+    const posts = allPosts.data || [];
+    return posts.map((p) => {
+      console.log(p);
+      return (
+        <Post
+          key={p.uuid}
+          title={p.title}
+          description={p.description}
+          createdAt={p.times.createdAt}
+          tags={p.tags}
+          onClick={() => goToPostDetailsPage(navigate, p.uuid)}
+        />
+      );
+    });
+  };
+
+  return <section>{listPosts()}</section>;
 }
