@@ -9,14 +9,18 @@ export const Container = styled.div`
     margin: 0;
   }
 
+  h1::first-letter,
+  h3::first-letter {
+    text-transform: uppercase;
+  }
+
   #title {
     margin-top: 1rem;
   }
 
   #date {
     color: ${colors.gray};
-    margin-top: 0.8rem;
-    padding: ${metrics.padding.small} 0;
+    margin-bottom: 3rem;
   }
 
   h3 {
