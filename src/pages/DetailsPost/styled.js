@@ -15,11 +15,14 @@ export const Container = styled.div`
 
   #title {
     margin-top: 1rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   #date {
     color: ${colors.gray};
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
   }
 
   h3 {
@@ -36,5 +39,9 @@ export const Container = styled.div`
   span {
     margin-right: 1rem;
     color: ${colors.theme.pink};
+  }
+
+  span::first-letter {
+    text-transform: uppercase;
   }
 `;

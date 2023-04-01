@@ -12,7 +12,7 @@ export function Pagination({ count, itemsPerPage, currentPage, onPageChage }) {
     pageNumbers.push(i);
   }
 
-  const haveItemForPaginate = count > 0;
+  const haveItemForPaginate = count > 1;
 
   return (
     haveItemForPaginate && (
