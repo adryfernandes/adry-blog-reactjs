@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { Main } from "../components/Main";
+import { CreatePost } from "../pages/CreatePost";
 import { DetailsPost } from "../pages/DetailsPost";
 import { Home } from "../pages/Home";
 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "post/:uuid",
         element: <DetailsPost />,
+      },
+      {
+        path: "create/post/:xApiKey",
+        element: <CreatePost />,
       },
     ],
   },

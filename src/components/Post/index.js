@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { Container, Content, Matters, Top } from "./styled";
 
 export function Post(props) {
@@ -16,7 +17,7 @@ export function Post(props) {
             <h2>{title}</h2>
             <h4>{description}</h4>
           </div>
-          <span id="date">{createdAt}</span>
+          <span id="date">{dayjs(createdAt).format("DD/MM/YYYY")}</span>
         </Top>
 
         <Matters>{listMatters}</Matters>

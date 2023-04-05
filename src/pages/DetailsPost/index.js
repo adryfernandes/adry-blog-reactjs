@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import dayjs from "dayjs";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { Loading } from "../../components/Loading";
 import { goToHome } from "../../router/coordinates";
@@ -47,7 +48,12 @@ export function DetailsPost() {
           <div id="title">
             <h1>{post.title}</h1>
             <h3>{post.description}</h3>
-            <p id="date">{post && post.times && post.times.createdAt}</p>
+            <p id="date">
+              {post &&
+                post.times &&
+                post.times.createdAt &&
+                dayjs(post.times.createdAt).format("DD/MM/YYYY")}
+            </p>
             {listTags}
           </div>
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
