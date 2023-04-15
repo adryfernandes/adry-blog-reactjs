@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router";
+import { BasePage } from "..";
 import { EditorArea } from "../../components/EditorArea";
 
 export function CreatePost() {
+  const navigate = useNavigate();
+
   return (
-    <div>
+    <BasePage navigate={navigate}>
       <EditorArea />
-    </div>
+    </BasePage>
   );
 }

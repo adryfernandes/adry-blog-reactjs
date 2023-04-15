@@ -8,14 +8,15 @@ import {
   Content,
   Title,
 } from "./styled";
+import { goToHome } from "../../router/coordinates";
 
-export function Header() {
+export function Header({ navigate }) {
   const [clickButton, setClickButton] = useState(false);
 
   return (
     <Container>
       <Content>
-        <Title>
+        <Title onClick={() => navigate && goToHome(navigate)}>
           <h1> My Learnings Hub</h1>
           <h2>Adryane Fernandes</h2>
         </Title>

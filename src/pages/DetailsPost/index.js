@@ -6,6 +6,7 @@ import { Loading } from "../../components/Loading";
 import { goToHome } from "../../router/coordinates";
 import { getPost } from "../../services/post.service";
 import { Container } from "./styled";
+import { BasePage } from "..";
 
 export function DetailsPost() {
   const [loading, setLoading] = useState(true);
@@ -39,26 +40,28 @@ export function DetailsPost() {
     tags && tags.map((tag) => <span key={tag.uuid}>{tag.title}</span>);
 
   return (
-    <Container>
-      <ErrorMessage message={error.message} onClose={onCloseModalError} />
-      <Loading loading={loading} />
+    <BasePage navigate={navigate}>
+      <Container>
+        <ErrorMessage message={error.message} onClose={onCloseModalError} />
+        <Loading loading={loading} />
 
-      {!loading && (
-        <>
-          <div id="title">
-            <h1>{post.title}</h1>
-            <h3>{post.description}</h3>
-            <p id="date">
-              {post &&
-                post.times &&
-                post.times.createdAt &&
-                dayjs(post.times.createdAt).format("DD/MM/YYYY")}
-            </p>
-            {listTags}
-          </div>
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        </>
-      )}
-    </Container>
+        {!loading && (
+          <>
+            <div id="title">
+              <h1>{post.title}</h1>
+              <h3>{post.description}</h3>
+              <p id="date">
+                {post &&
+                  post.times &&
+                  post.times.createdAt &&
+                  dayjs(post.times.createdAt).format("DD/MM/YYYY")}
+              </p>
+              {listTags}
+            </div>
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          </>
+        )}
+      </Container>
+    </BasePage>
   );
 }

@@ -7,6 +7,7 @@ import { Pagination } from "../../components/Pagination";
 import { Post } from "../../components/Post";
 import { goToPostDetailsPage } from "../../router/coordinates";
 import { listPostsService } from "../../services/post.service.js";
+import { BasePage } from "..";
 
 export function Home() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ export function Home() {
   const onCloseModalError = () => setError({ message: "" });
 
   return (
-    <>
+    <BasePage navigate={navigate}>
       <ErrorMessage message={error.message} onClose={onCloseModalError} />
       <Loading loading={loading} />
       {!loading && (
@@ -65,6 +66,6 @@ export function Home() {
       )}
 
       {!allPosts.data.length && <EmptyPage />}
-    </>
+    </BasePage>
   );
 }

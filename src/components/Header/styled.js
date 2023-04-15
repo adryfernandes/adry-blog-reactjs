@@ -27,6 +27,12 @@ export const Content = styled.div`
 
 export const Title = styled.div`
   margin-bottom: 1.5rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
   @media (min-width: ${breakpoints.md}) {
     margin-bottom: 0;
   }
