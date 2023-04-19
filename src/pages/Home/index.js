@@ -1,41 +1,65 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { EmptyPage } from "../../components/EmptyPage";
-import { ErrorMessage } from "../../components/ErrorMessage";
-import { Loading } from "../../components/Loading";
-import { Pagination } from "../../components/Pagination";
-import { Post } from "../../components/Post";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  EmptyPage,
+  ErrorMessage,
+  Loading,
+  Pagination,
+  Post,
+} from "../../components";
 import { goToPostDetailsPage } from "../../router/coordinates";
 import { listPostsService } from "../../services/post.service.js";
 import { BasePage } from "..";
 
 export function Home() {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState({ message: "" });
-  const [allPosts, setAllPosts] = useState({ data: [], count: 0 });
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const search = queryParams.get("search");
+
+  const [state, setState] = useState({
+    loading: true,
+    error: { message: "" },
+    allPosts: { data: [], count: 0 },
+    currentPage: 1,
+    itemsPerPage: 5,
+  });
 
   const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    setState({ ...state, pageNumber });
+  };
+
+  const init = () => {
+    if (location.pathname.includes("result") && !search) {
+      setState({ ...state, allPosts: { data: [], count: 0 } });
+    } else {
+      list();
+    }
+  };
+
+  const list = async () => {
+    try {
+      const { currentPage, itemsPerPage } = state;
+      const allPosts = await listPostsService(
+        search,
+        currentPage,
+        itemsPerPage
+      );
+
+      setState({ ...state, allPosts, loading: false });
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.message) {
+        setState({ ...state, error: err.response.data.message });
+      }
+      setState({ ...state, loading: false });
+    }
   };
 
   useEffect(() => {
-    listPostsService(currentPage, itemsPerPage)
-      .then((res) => {
-        setAllPosts(res);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err.response && err.response.data && err.response.data.message) {
-          setError({ message: err.response.data.message });
-        }
-        setLoading(false);
-      });
-  }, [currentPage, itemsPerPage]);
+    init();
+  }, [state.currentPage, state.itemsPerPage, search]);
 
-  const listPosts = allPosts.data.map((p) => (
+  const listPosts = state.allPosts.data.map((p) => (
     <Post
       key={p.uuid}
       title={p.title}
@@ -46,26 +70,27 @@ export function Home() {
     />
   ));
 
-  const onCloseModalError = () => setError({ message: "" });
+  const onCloseModalError = () =>
+    setState({ ...state, error: { message: "" } });
 
   return (
     <BasePage navigate={navigate}>
-      <ErrorMessage message={error.message} onClose={onCloseModalError} />
-      <Loading loading={loading} />
-      {!loading && (
+      <ErrorMessage message={state.error.message} onClose={onCloseModalError} />
+      <Loading loading={state.loading} />
+      {!state.loading && (
         <>
           {listPosts}
           <Pagination
-            items={allPosts}
-            count={allPosts.count}
-            itemsPerPage={itemsPerPage}
-            currentPage={currentPage}
+            items={state.allPosts}
+            count={state.allPosts.count}
+            itemsPerPage={state.itemsPerPage}
+            currentPage={state.currentPage}
             onPageChage={handlePageChange}
           />
         </>
       )}
 
-      {!allPosts.data.length && <EmptyPage />}
+      {!state.allPosts.data.length && <EmptyPage />}
     </BasePage>
   );
 }

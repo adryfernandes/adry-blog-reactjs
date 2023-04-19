@@ -12,6 +12,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/result",
+        element: <Home />,
+      },
+      {
         path: "post/:uuid",
         element: <DetailsPost />,
       },

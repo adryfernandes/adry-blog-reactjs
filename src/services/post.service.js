@@ -8,12 +8,18 @@ import config from "../environments/config";
  * @param {*} order - ascendente ou descendente (por data de criação)
  * @returns
  */
-export const listPostsService = async (initialPage, offset, order = "ASC") => {
+export const listPostsService = async (
+  search,
+  initialPage,
+  offset,
+  order = "ASC"
+) => {
   const response = await axios.get(`${config.api_url}/post/list`, {
     params: {
       initialPage,
       offset,
       order,
+      search,
     },
   });
 

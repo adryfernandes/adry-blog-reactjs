@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-export function EditorArea() {
-  const [content, setContent] = useState("");
+export function EditorArea({ value, onChange }) {
   const quillRef = useRef();
 
   const modules = {
@@ -27,8 +26,8 @@ export function EditorArea() {
   return (
     <ReactQuill
       ref={quillRef}
-      value={content}
-      onChange={setContent}
+      value={value}
+      onChange={onChange}
       modules={modules}
     />
   );

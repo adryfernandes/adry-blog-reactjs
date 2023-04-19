@@ -3,5 +3,9 @@ export const goToPostDetailsPage = (navigate, uuid) => {
 };
 
 export const goToHome = (navigate) => {
-  navigate(`/`);
+  navigate("/");
+};
+
+export const goToResult = (navigate, search = "") => {
+  navigate(`/result/?search=${search}`);
 };
