@@ -17,21 +17,19 @@ export function Home() {
   const queryParams = new URLSearchParams(location.search);
   const search = queryParams.get("search");
 
-  const [state, setState] = useState({
-    loading: true,
-    error: { message: "" },
-    allPosts: { data: [], count: 0 },
-    currentPage: 1,
-    itemsPerPage: 5,
-  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState({ message: "" });
+  const [allPosts, setAllPosts] = useState({ data: [], count: 0 });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
 
   const handlePageChange = (pageNumber) => {
-    setState({ ...state, pageNumber });
+    setCurrentPage(pageNumber);
   };
 
   const init = () => {
     if (location.pathname.includes("result") && !search) {
-      setState({ ...state, allPosts: { data: [], count: 0 } });
+      setAllPosts({ data: [], count: 0 });
     } else {
       list();
     }
@@ -39,27 +37,23 @@ export function Home() {
 
   const list = async () => {
     try {
-      const { currentPage, itemsPerPage } = state;
-      const allPosts = await listPostsService(
-        search,
-        currentPage,
-        itemsPerPage
-      );
+      const posts = await listPostsService(search, currentPage, itemsPerPage);
 
-      setState({ ...state, allPosts, loading: false });
+      setAllPosts(posts);
+      setLoading(false);
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
-        setState({ ...state, error: err.response.data.message });
+        setError({ message: err.response.data.message });
       }
-      setState({ ...state, loading: false });
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     init();
-  }, [state.currentPage, state.itemsPerPage, search]);
+  }, [currentPage, itemsPerPage, search]);
 
-  const listPosts = state.allPosts.data.map((p) => (
+  const listPosts = allPosts.data.map((p) => (
     <Post
       key={p.uuid}
       title={p.title}
@@ -70,27 +64,26 @@ export function Home() {
     />
   ));
 
-  const onCloseModalError = () =>
-    setState({ ...state, error: { message: "" } });
+  const onCloseModalError = () => setError({ message: "" });
 
   return (
     <BasePage navigate={navigate}>
-      <ErrorMessage message={state.error.message} onClose={onCloseModalError} />
-      <Loading loading={state.loading} />
-      {!state.loading && (
+      <ErrorMessage message={error.message} onClose={onCloseModalError} />
+      <Loading loading={loading} />
+      {!loading && (
         <>
           {listPosts}
           <Pagination
-            items={state.allPosts}
-            count={state.allPosts.count}
-            itemsPerPage={state.itemsPerPage}
-            currentPage={state.currentPage}
+            items={allPosts}
+            count={allPosts.count}
+            itemsPerPage={itemsPerPage}
+            currentPage={currentPage}
             onPageChage={handlePageChange}
           />
         </>
       )}
 
-      {!state.allPosts.data.length && <EmptyPage />}
+      {!allPosts.data.length && <EmptyPage />}
     </BasePage>
   );
 }

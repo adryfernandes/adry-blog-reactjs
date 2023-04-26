@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import { ErrorMessage } from "../../components/ErrorMessage";
+import { ErrorMessage } from "../../components/AlertMessage";
 import { Loading } from "../../components/Loading";
 import { goToHome } from "../../router/coordinates";
 import { getPost } from "../../services/post.service";
@@ -19,18 +19,22 @@ export function DetailsPost() {
     goToHome(navigate);
   }
 
+  const handlePost = async () => {
+    try {
+      const post = await getPost(uuid);
+
+      setPosts(post);
+      setLoading(false);
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.message) {
+        setError({ message: err.response.data.message });
+      }
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    getPost(uuid)
-      .then((res) => {
-        setPosts(res);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err.response && err.response.data && err.response.data.message) {
-          setError({ message: err.response.data.message });
-        }
-        setLoading(false);
-      });
+    handlePost();
   }, []);
 
   const onCloseModalError = () => setError({ message: "" });

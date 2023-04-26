@@ -2,7 +2,7 @@ import { useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-export function EditorArea({ value, onChange }) {
+export function EditorArea(props) {
   const quillRef = useRef();
 
   const modules = {
@@ -23,12 +23,5 @@ export function EditorArea({ value, onChange }) {
     },
   };
 
-  return (
-    <ReactQuill
-      ref={quillRef}
-      value={value}
-      onChange={onChange}
-      modules={modules}
-    />
-  );
+  return <ReactQuill {...props} ref={quillRef} modules={modules} />;
 }

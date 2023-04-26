@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../theme/colors";
+import { Grid } from "@mui/material";
 
 export const DropzoneContainer = styled.div`
   border: 2px dashed ${(props) => (props.isDragActive ? "blue" : "gray")};
@@ -7,27 +8,24 @@ export const DropzoneContainer = styled.div`
   margin: 20px;
 `;
 
-export const Form = styled.form`
-  .form-line {
-    display: flex;
-    flex-direction: column;
-    margin: 1rem 0;
+export const Form = styled(Grid)`
+  div {
+    /* margin-top: 1rem; */
   }
 
-  label {
-    color: ${colors.gray};
-    font-weight: 500;
+  .form-area {
+    margin-top: 1.5rem;
   }
 
-  input,
-  textarea {
-    border: 1px solid ${colors.gray};
-    border-radius: 4px;
-    padding: 12px;
+  #content-area {
+    label {
+      color: ${colors.gray};
+    }
   }
+`;
 
-  .form-line-button {
-    display: flex;
-    justify-content: end;
-  }
+export const ContainerButton = styled(Grid)`
+  display: flex;
+  justify-content: end;
+  padding-top: 2rem;
 `;

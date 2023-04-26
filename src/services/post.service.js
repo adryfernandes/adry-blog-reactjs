@@ -30,3 +30,10 @@ export const getPost = async (uuid) => {
   const response = await axios.get(`${config.api_url}/post/${uuid}`);
   return response.data;
 };
+
+export const createPost = async (payload, xApiKey) => {
+  const response = await axios.post(`${config.api_url}/post`, payload, {
+    headers: { ["x-api-key"]: xApiKey },
+  });
+  return response.data;
+};
