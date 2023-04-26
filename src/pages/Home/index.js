@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   EmptyPage,
-  ErrorMessage,
+  AlertMessage,
   Loading,
   Pagination,
   Post,
@@ -18,7 +18,7 @@ export function Home() {
   const search = queryParams.get("search");
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState({ message: "" });
+  const [alert, setAlert] = useState({ message: "", severety: "" });
   const [allPosts, setAllPosts] = useState({ data: [], count: 0 });
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -43,7 +43,7 @@ export function Home() {
       setLoading(false);
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
-        setError({ message: err.response.data.message });
+        setAlert({ message: err.response.data.message });
       }
       setLoading(false);
     }
@@ -64,11 +64,11 @@ export function Home() {
     />
   ));
 
-  const onCloseModalError = () => setError({ message: "" });
+  const onCloseModal = () => setAlert({ message: "", severety: "" });
 
   return (
     <BasePage navigate={navigate}>
-      <ErrorMessage message={error.message} onClose={onCloseModalError} />
+      <AlertMessage message={alert.message} onClose={onCloseModal} />
       <Loading loading={loading} />
       {!loading && (
         <>

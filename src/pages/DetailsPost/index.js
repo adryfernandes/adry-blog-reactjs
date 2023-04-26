@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import { ErrorMessage } from "../../components/AlertMessage";
+import { AlertMessage } from "../../components/AlertMessage";
 import { Loading } from "../../components/Loading";
 import { goToHome } from "../../router/coordinates";
 import { getPost } from "../../services/post.service";
@@ -10,7 +10,7 @@ import { BasePage } from "..";
 
 export function DetailsPost() {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState({ message: "" });
+  const [alert, setAlert] = useState({ message: "", severety: "" });
   const [post, setPosts] = useState({});
 
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export function DetailsPost() {
       setLoading(false);
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
-        setError({ message: err.response.data.message });
+        setAlert({ message: err.response.data.message });
       }
       setLoading(false);
     }
@@ -37,7 +37,7 @@ export function DetailsPost() {
     handlePost();
   }, []);
 
-  const onCloseModalError = () => setError({ message: "" });
+  const onCloseModal = () => setAlert({ message: "", severety: "" });
 
   const tags = post && post.tags;
   const listTags =
@@ -46,7 +46,11 @@ export function DetailsPost() {
   return (
     <BasePage navigate={navigate}>
       <Container>
-        <ErrorMessage message={error.message} onClose={onCloseModalError} />
+        <AlertMessage
+          message={alert.message}
+          severety={alert.severety}
+          onClose={onCloseModal}
+        />
         <Loading loading={loading} />
 
         {!loading && (

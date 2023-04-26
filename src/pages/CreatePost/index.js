@@ -22,7 +22,7 @@ export function CreatePost() {
   const [tagsTitle, setTagsTitle] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [alert, setAlert] = useState({ message: "", severety: "" });
+  const [alert, setAlert] = useState({ message: "", isSuccess: false });
 
   useEffect(() => {
     listTags();
@@ -42,7 +42,6 @@ export function CreatePost() {
         const error = err.response.data.message;
         setAlert({
           message: Array.isArray(error) ? error[0] : error,
-          severety: "error",
         });
       }
       setLoading(false);
@@ -80,20 +79,19 @@ export function CreatePost() {
       await createPost(payload, xApiKey);
       setLoading(false);
       resetForm();
-      setAlert({ message: "Post criado com sucesso.", severety: "success" });
+      setAlert({ message: "Post criado com sucesso.", isSuccess: true });
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
         const error = err.response.data.message;
         setAlert({
           message: Array.isArray(error) ? error[0] : error,
-          severety: "error",
         });
       }
       setLoading(false);
     }
   };
 
-  const onCloseAlert = () => setAlert({ message: "", severety: "" });
+  const onCloseAlert = () => setAlert({ message: "", isSuccess: false });
 
   return (
     <BasePage navigate={navigate}>
